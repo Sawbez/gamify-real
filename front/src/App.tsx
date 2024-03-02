@@ -2,9 +2,23 @@ import { useState } from "react";
 import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
+import useFetch from "./useFetch";
 
-function App() {
+type HelloSchema = {
+  hello: string;
+};
+
+const App = () => {
+  const [resp, loading] = useFetch<HelloSchema>("/hw");
   const [count, setCount] = useState(0);
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
+
+  if (!resp || !resp.hello) {
+    return <h1>Error {String(resp)} 🤕</h1>;
+  }
 
   return (
     <>
@@ -16,7 +30,9 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1 className="text-green-500">Vite + React</h1>
+      <h1 id="test" className="text-green-500">
+        {resp.hello}
+      </h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
@@ -30,6 +46,6 @@ function App() {
       </p>
     </>
   );
-}
+};
 
 export default App;
