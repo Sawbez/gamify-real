@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 from os import environ
 
 import psycopg2
@@ -26,13 +28,13 @@ def use_db(f):
 def execute(cur, conn, *args):
     cur.execute(*args)
     conn.commit()
-    
+
 @use_db
 def executescript(cur, conn, *args):
     cur.executescript(*args)
     conn.commit()
-    
-    
+
+
 @use_db
 def fetchone(cur, _, *args):
     return cur.execute(*args).fetchone()

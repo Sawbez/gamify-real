@@ -25,7 +25,7 @@ def api():
 def users():
     execute("INSERT INTO Users (name) VALUES (%s)", ("abacadaba"))
     users = fetchall()
-    return
+    return jsonify(users)
 
 
 if __name__ == "__main__":
