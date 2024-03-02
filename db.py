@@ -25,20 +25,20 @@ def use_db(f):
 
 
 @use_db
-def execute(cur, conn, *args):
+def execute(cur: psycopg2.extensions.cursor, conn: psycopg2.extensions.connection, *args):
     cur.execute(*args)
     conn.commit()
 
 @use_db
-def executescript(cur, conn, *args):
+def executescript(cur: psycopg2.extensions.cursor, conn: psycopg2.extensions.connection, *args):
     cur.executescript(*args)
     conn.commit()
 
 
 @use_db
-def fetchone(cur, _, *args):
+def fetchone(cur: psycopg2.extensions.cursor, conn: psycopg2.extensions.connection, *args):
     return cur.execute(*args).fetchone()
 
 @use_db
-def fetchall(cur, conn, *args):
+def fetchall(cur: psycopg2.extensions.cursor, conn: psycopg2.extensions.connection, *args):
     cur.execute(*args).fetchall()
