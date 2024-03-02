@@ -1,5 +1,3 @@
-import sqlite3
-from enum import Enum
 
 """
 -- Categories Table
