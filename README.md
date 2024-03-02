@@ -13,6 +13,6 @@ First, compile the frontend (execute in "/front"):
 `npm run build`
 
 Next, run the python server (execute in "/"):
-`py main.py`
+`py index.py`
 
 Re-run the npm build if you change the front end. 
