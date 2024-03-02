@@ -28,7 +28,7 @@ def execute(cur, conn, *args):
     conn.commit()
     
 @use_db
-def execute(cur, conn, *args):
+def executescript(cur, conn, *args):
     cur.executescript(*args)
     conn.commit()
     

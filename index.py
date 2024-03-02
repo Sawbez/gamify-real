@@ -2,10 +2,10 @@ from pathlib import Path
 
 from flask import Flask, jsonify, render_template
 
-from db import execute, executescript, fetchone
+from db import execute, executescript, fetchall, fetchone
 
 dist = Path.joinpath(Path(__file__).parent, "front/dist")
-app = Flask(__name__, static_folder=dist/"assets", template_folder=dist)
+app = Flask(__name__, static_folder=dist / "assets", template_folder=dist)
 
 with open("schema.sql", "r") as f:
     executescript(f.read())
@@ -13,19 +13,20 @@ with open("schema.sql", "r") as f:
 
 @app.route("/")
 def hello():
-  return render_template("index.html")
+    return render_template("index.html")
 
 
 @app.route("/hw")
 def api():
-  return jsonify({"hello": "world"})
+    return jsonify({"hello": "world"})
 
 
 @app.route("/users")
 def users():
-    execute("INSERT INTO test (num, data) VALUES (%s, %s)", (100, "abc'def"))
+    execute("INSERT INTO Users (name) VALUES (%s)", ("abacadaba"))
+    users = fetchall()
     return
 
 
 if __name__ == "__main__":
-  app.run(debug=True)
+    app.run(debug=True)
