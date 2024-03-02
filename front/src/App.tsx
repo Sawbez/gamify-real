@@ -12,11 +12,7 @@ const App = () => {
   const [resp, loading] = useFetch<HelloSchema>("/hw");
   const [count, setCount] = useState(0);
 
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
-
-  if (!resp || !resp.hello) {
+  if (!resp && !loading) {
     return <h1>Error {String(resp)} 🤕</h1>;
   }
 
@@ -31,7 +27,7 @@ const App = () => {
         </a>
       </div>
       <h1 id="test" className="text-green-500">
-        {resp.hello}
+        {loading ? "loading" : resp?.hello}
       </h1>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
