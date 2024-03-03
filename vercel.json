@@ -1,18 +1,18 @@
 {
-    "version": 2,
-    "builds": [
-        {
-            "buildCommand": "cd front && npm run build && cd .. ",
-            "outputDirectory": "front/dist",
-            "installCommand": "cd front && npm i",
-            "src": "./index.py",
-            "use": "@vercel/python"
-        }
-    ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/"
-        }
-    ]
+  "version": 2,
+  "buildCommand": "cd front && npm run build && cd .. ",
+  "outputDirectory": "front/dist",
+  "installCommand": "cd front && npm i",
+  "builds": [
+    {
+      "src": "./index.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/"
+    }
+  ]
 }
