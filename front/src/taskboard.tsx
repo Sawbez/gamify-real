@@ -2,7 +2,7 @@ import "./App.css";
 import { User } from "./schema.ts";
 
 
-const TaskBoard = ({userInfo}:{userInfo:}) =>{
+const TaskBoard = ({userInfo}:{userInfo:User|null}) =>{
 
   return (
     <>
