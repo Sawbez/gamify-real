@@ -47,14 +47,26 @@ const TaskBoard = ({ userInfo }:{
               <div className="atask"key={task.id}>
                 <h2>name {task.name}</h2>
                 <p> desc {task.description}</p>
+                <p> points {task.points}</p>
+                <p> category {task.categoryId}</p>
               </div>
             )) : <p>No tasks</p>}
 
-            
+            <form>
+              <label>name</label>
+              <input name="name"></input>
+              <label>Desc</label>
+              <input name="description"></input>
+              <label>Category</label>
+              <input name="categoryId"></input>
+            </form>
         </>
       ) : (<><p>nothing here :)</p><div className="atask">
       <h2>name coolName</h2>
       <p> desc some description</p>
+      <p>points 10</p>
+      <p>cateogory "cooking"</p>
+      <button>finished this</button>
     </div></>)
       }
     </>
