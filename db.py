@@ -1,5 +1,6 @@
 from configparser import ConfigParser
 from os import environ
+from typing import Callable
 
 config = ConfigParser()
 config.read('.env.db')
@@ -15,13 +16,13 @@ get_conn = lambda: psycopg2.connect(
 )
 
 
-def use_db(f):
+def use_db(f: Callable):
     def wrapper(*args, **kwargs):
         conn = get_conn()
         cur = conn.cursor()
-        
+
         req = f(cur, conn, *args, **kwargs)
-        
+
         cur.close()
         conn.close()
 
@@ -31,22 +32,22 @@ def use_db(f):
 
 
 @use_db
-def execute(cur, conn, *args):
+def execute(cur: psycopg2._psycopg.cursor, conn: psycopg2._psycopg.connection, *args):
     cur.execute(*args)
     conn.commit()
 
 @use_db
-def executescript(cur, conn, *args):
+def executescript(cur: psycopg2._psycopg.cursor, conn: psycopg2._psycopg.connection, *args):
     cur.executescript(*args)
     conn.commit()
 
 
 @use_db
-def fetchone(cur, _, *args):
+def fetchone(cur: psycopg2._psycopg.cursor, _, *args):
     cur.execute(*args)
     return cur.fetchone()
 
 @use_db
-def fetchall(cur, _, *args):
+def fetchall(cur: psycopg2._psycopg.cursor, _, *args):
     cur.execute(*args)
     return cur.fetchall()

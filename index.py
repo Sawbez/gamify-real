@@ -1,9 +1,55 @@
 from pathlib import Path
+from typing import Optional
 
 from flask import Flask, jsonify, render_template, send_from_directory, request
 from jinja2 import TemplateError
 
-from db import execute, executescript, fetchall, fetchone
+from db import execute, fetchall, fetchone
+from typing import List, TypedDict
+
+class Category(TypedDict):
+    id: int
+    name: str
+
+class Achievement(TypedDict):
+    id: int
+    name: str
+    description: str
+    points: int
+    categoryId: int
+
+class User(TypedDict):
+    id: int
+    username: str
+
+class UserExperience(TypedDict):
+    userId: int
+    categoryId: int
+    experience: int
+
+class UserLevel(TypedDict):
+    userId: int
+    categoryId: int
+    level: int
+
+class UserAchievement(TypedDict):
+    userId: int
+    achievementId: int
+
+class Task(TypedDict):
+    id: int
+    userId: int
+    name: str
+    description: str
+    points: int
+    categoryId: int
+
+class SubTask(TypedDict):
+    id: int
+    taskId: int
+    name: str
+    description: str
+    points: int
 
 dist = Path.joinpath(Path(__file__).parent, "front/dist")
 app = Flask(__name__, static_folder=dist / "assets", template_folder=dist)
@@ -21,22 +67,31 @@ def hello():
 def api():
     return jsonify({"hello": "world"})
 
-@app.route("/users/", methods=["GET"])
 @app.route("/users/<string:username>", methods=["GET", "POST"])
-def users(username=None):
+def users(username: Optional[str] = None):
     if request.method == "GET":
         if username:
             user = fetchone("SELECT * FROM Users WHERE username = %s", (username,))
             if (user):
                 #success
-                return jsonify({"result": "success"})
-            else : 
+                return jsonify({
+                    "username": user[1],
+                    "id": user[0],
+                })
+            else:
                 # failure
                 return jsonify({"result": "failure"}), 404
-            
+
         else:
             users = fetchall("SELECT * FROM Users")
-            return jsonify(users)
+            print(users)
+            usersobj = []
+            for user in users:
+                usersobj.append ({
+                    "username": user[1],
+                    "id": user[0],
+                })
+            return jsonify(usersobj)
     elif request.method == "POST":
         execute("INSERT INTO Users (username) VALUES (%s)", (username,))
         return jsonify({ "message": "success" })
