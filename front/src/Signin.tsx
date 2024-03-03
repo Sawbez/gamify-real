@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { Dispatch, SetStateAction,useState } from "react";
 import { User } from "./schema.ts";
-import  { Redirect } from 'react-router-dom'
+import  { Redirect,redirect } from 'react-router-dom'
 
 
 const SignIn = ({ setSignedIn, setUserInfo }: {
@@ -48,7 +48,7 @@ const SignIn = ({ setSignedIn, setUserInfo }: {
   };
 
   if (redirectToHome) {
-    return <edirect to="/" />;
+    return <Redirect to="/" />;
   }
 
   return (

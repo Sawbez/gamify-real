@@ -9,26 +9,8 @@ import SignUp from "./Signup.tsx";
 import { useState } from "react";
 import { User } from "./schema.ts";
 
-
-const App2 = () =>{
-  const [signedin, setSignedIn] = useState(false)
-  const [userInfo,setUserInfo] = useState<User|null>(null)
-
-  return (
-    <BrowserRouter>
-    <Routes>
-        <Route path='/' element={<Layout signedin={signedin} userInfo={userInfo}/>}>
-          <Route index element={<App signedin={signedin} userInfo={userInfo}/>}></Route>
-          <Route path="/signin" element={<SignIn setSignedIn={setSignedIn} setUserInfo={setUserInfo}/>}></Route>
-          <Route path="/signup" element={<SignUp setSignedIn={setSignedIn} setUserInfo={setUserInfo}/>}></Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App2 />
+    <App />
   </React.StrictMode>
 );
