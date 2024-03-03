@@ -2,30 +2,23 @@ import React from "react";
 import "./App.css";
 
 const SignUp = () => {
-  const signuup = async (event: React.FormEvent<HTMLFormElement>) => {
+  const login = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
-    // Ensure you have a correct endpoint and method for your fetch call
-    const response = await fetch(`/users/${username}/`, {
-      method: 'POST', // or 'POST', depending on your backend
-      // headers: {}, // if you need to include headers
-      // body: JSON.stringify(data), // if you need to include a body
-    });
-    const data = await response.json(); // Assuming the response is JSON
-    console.log(data); // Process the response data
+    console.log(username); // Process username here
   };
 
   return (
     <>
-      <h1>Sign in</h1>
-      <form onSubmit={signuup}>
+      <h1 className="text-blue-800"
+      >Sign in</h1>
+      <form onSubmit={login}>
         <label>Username</label>
         <input type="text" name="username" />
-        <button type="submit">Sign in</button>
+        <button type="submit" className="bg-blue-500">Sign in</button>
       </form>
     </>
   );
 };
-
 export default SignUp;
