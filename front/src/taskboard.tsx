@@ -49,6 +49,11 @@ const TaskBoard = ({ userInfo }:{
                 <p> desc {task.description}</p>
               </div>
             )) : <p>No tasks</p>}
+
+            <div className="atask">
+                <h2>name coolName</h2>
+                <p> desc some description</p>
+              </div>
         </>
       ) : (<p>nothing here :)</p>)
       }
