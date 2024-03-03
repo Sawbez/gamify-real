@@ -7,6 +7,7 @@ import SignIn from "./Signin.tsx";
 import Layout from "./Layout.tsx";
 import SignUp from "./Signup.tsx";
 import { useState } from "react";
+import { User } from "./schema.ts";
 
 
 const App2 = () =>{
