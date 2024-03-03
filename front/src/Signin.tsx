@@ -3,6 +3,8 @@ import "./App.css";
 
 const SignIn = () => {
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
+    //CHECK if it worked serverside, not clientside, if it works, create a session, then return SUCESS: true/false
+
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");

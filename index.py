@@ -27,7 +27,13 @@ def users(username=None):
     if request.method == "GET":
         if username:
             user = fetchone("SELECT * FROM Users WHERE username = %s", (username,))
-            return jsonify(user)
+            if (user):
+                #success
+                return jsonify({"result": "success"})
+            else : 
+                # failure
+                return jsonify({"result": "failure"}), 404
+            
         else:
             users = fetchall("SELECT * FROM Users")
             return jsonify(users)
