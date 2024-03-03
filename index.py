@@ -63,7 +63,6 @@ def users(username: Optional[str] = None):
     else:
         return 404
 
-
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
 def other(path):
