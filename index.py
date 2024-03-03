@@ -276,7 +276,8 @@ def hl_user_level(username: str):
 @app.route("/<path:path>")
 def other(path):
     try:
-        return render_template("index.html", session=session)
+        # return render_template("index.html", session=session)
+        return jsonify({ "result": "failure" }), 404
     except TemplateError:
         return "404", 404
 
