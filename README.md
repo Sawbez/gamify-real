@@ -9,6 +9,8 @@ This will not start the backend, so any interactions attempted with the flask se
 
 ## Backend
 
+Ensure you have the db env in `.env.db`
+
 First, compile the frontend (execute in "/front"):
 `npm run build`
 

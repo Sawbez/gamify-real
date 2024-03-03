@@ -1,8 +1,3 @@
-DROP TABLE IF EXISTS Categories;
-DROP TABLE IF EXISTS Achievements;
-DROP TABLE IF EXISTS Users;
-DROP TABLE IF EXISTS Tasks;
-
 /*
 Synopsis:
 
@@ -28,14 +23,14 @@ type Leaderboard = Record<Categories, User[]>;
 */
 
 -- Categories Table
-CREATE TABLE Categories (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS Categories (
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE -- 'Health/Foods', 'Work', 'Fitness'
 );
 
 -- Achievements Table
-CREATE TABLE Achievements (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS Achievements (
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     points INTEGER NOT NULL,
@@ -44,13 +39,13 @@ CREATE TABLE Achievements (
 );
 
 -- Users Table
-CREATE TABLE Users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS Users (
+    id SERIAL PRIMARY KEY,
     username TEXT NOT NULL UNIQUE
 );
 
 -- User Experience Table
-CREATE TABLE UserExperience (
+CREATE TABLE IF NOT EXISTS UserExperience (
     userId INTEGER,
     categoryId INTEGER,
     experience INTEGER NOT NULL,
@@ -60,7 +55,7 @@ CREATE TABLE UserExperience (
 );
 
 -- User Levels Table
-CREATE TABLE UserLevels (
+CREATE TABLE IF NOT EXISTS UserLevels (
     userId INTEGER,
     categoryId INTEGER,
     level INTEGER NOT NULL,
@@ -70,7 +65,7 @@ CREATE TABLE UserLevels (
 );
 
 -- User Achievements Join Table
-CREATE TABLE UserAchievements (
+CREATE TABLE IF NOT EXISTS UserAchievements (
     userId INTEGER,
     achievementId INTEGER,
     PRIMARY KEY (userId, achievementId),
@@ -79,8 +74,8 @@ CREATE TABLE UserAchievements (
 );
 
 -- Tasks Table
-CREATE TABLE Tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS Tasks (
+    id SERIAL PRIMARY KEY,
     userId INTEGER NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -91,8 +86,8 @@ CREATE TABLE Tasks (
 );
 
 -- Sub-Tasks Table
-CREATE TABLE SubTasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE IF NOT EXISTS SubTasks (
+    id SERIAL PRIMARY KEY,
     taskId INTEGER NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,

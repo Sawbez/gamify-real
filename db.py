@@ -1,12 +1,16 @@
-from os import environ
+from configparser import ConfigParser
 
 import psycopg2
 
+config = ConfigParser()
+config.read('.env.db')
+config = config["ENV"]
+
 conn = psycopg2.connect(
-    dbname=environ["POSTGRES_DATABASE"],
-    user=environ["POSTGRES_USER"],
-    password=environ["POSTGRES_PASSWORD"],
-    host=environ["POSTGRES_HOST"],
+    dbname=config["POSTGRES_DATABASE"],
+    user=config["POSTGRES_USER"],
+    password=config["POSTGRES_PASSWORD"],
+    host=config["POSTGRES_HOST"],
 )
 
 
@@ -26,17 +30,12 @@ def use_db(f):
 def execute(cur, conn, *args):
     cur.execute(*args)
     conn.commit()
-    
-@use_db
-def executescript(cur, conn, *args):
-    cur.executescript(*args)
-    conn.commit()
-    
-    
+
 @use_db
 def fetchone(cur, _, *args):
     return cur.execute(*args).fetchone()
 
+
 @use_db
 def fetchall(cur, conn, *args):
-    cur.execute(*args).fetchall()
+    return cur.execute(*args).fetchall()
