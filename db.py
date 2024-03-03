@@ -36,7 +36,7 @@ def get_conn():
 
 
 def use_db(f: Callable) -> Callable:
-    def wrapper(*args, dtype: T | None = None, **kwargs):  # Optional data_class argument
+    def wrapper(*args, dtype: Optional[T] = None, **kwargs):  # Optional data_class argument
         conn = get_conn()
         cur = conn.cursor()
 
