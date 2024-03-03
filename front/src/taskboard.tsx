@@ -62,23 +62,25 @@ const TaskBoard = ({ userInfo }:{
             <form onSubmit={addTask}>
               <h2>create a task</h2>
               <label>name</label>
-              <input name="name"></input>
+              <input name="name" />
               <label>Desc</label>
-              <input name="description"></input>
+              <input name="description" />
               <label>Category</label>
-              <input name="categoryId"></input>
-              <input type="submit">add Task</input>
+              <input name="categoryId" />
+              <button type="submit">create task</button>
             </form>
 
         </>
-      ) : (<><p>nothing here :)</p><div className="atask">
-      <h2>name coolName</h2>
-      <p> desc some description</p>
-      <p>points 10</p>
-      <p>cateogory "cooking"</p>
-      <button>finished this</button>
-    </div></>)
-      }
+      ) : (<>
+      <p>nothing here :)</p>
+      <div className="atask">
+        <h2>name coolName</h2>
+        <p> desc some description</p>
+        <p>points 10</p>
+        <p>cateogory "cooking"</p>
+        <button>finished this</button>
+      </div>
+    </>)};
     </>
   );
 };
