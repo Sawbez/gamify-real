@@ -52,6 +52,7 @@ def users(username: Optional[str] = None):
             return jsonify(users)
     elif request.method == "POST":
         execute("INSERT INTO Users (username) VALUES (%s)", (username,))
+        session["username"] = username
         return jsonify({ "message": "success" })
     else:
         return 404

@@ -12,8 +12,6 @@ const Layout = ({ userInfo }: {
       <nav>
         <ul>
           {/* Safely render username if userInfoVal is not null */}
-          {userInfoVal && <p>{userInfoVal.username}</p>}
-
           <li>
             <Link to="/" className="text-blue-600">Home</Link>
           </li>
@@ -23,14 +21,12 @@ const Layout = ({ userInfo }: {
           ) : (
             <>
               <li>
-                <Link to="/signin" className="text-blue-600">Sign in LLLLLLLLLLLL</Link>
+                <Link to="/signin" className="text-blue-600">Sign in</Link>
               </li>
               <li>
                 <Link to="/signup" className="text-blue-600">Signup</Link>
               </li>
-              <li>
-                <Link to="/taskboard" className="text-blue-600">Taskboard</Link>
-              </li>
+
             </>
           )}
         </ul>
