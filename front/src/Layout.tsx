@@ -17,7 +17,7 @@ const Layout = ({signedin, userInfo }: {
           </li>
           { signedin ? (<p></p>):(
           <li>
-            <Link to="/signin" className="text-blue-600">sign in</Link>
+            <Link to="/signin" className="text-blue-600">Sign in</Link>
           </li>
           )}
           <li>
