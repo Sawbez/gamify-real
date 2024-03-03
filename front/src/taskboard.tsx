@@ -46,9 +46,10 @@ const TaskBoard = ({ userInfo }:{
 
   return (
     <>
+
       {userInfoVal ? (
         <>
-          <h1>this is a taskboard :) </h1>
+          <h1>{"this is a taskboard :) "}</h1>
           {tasks.length > 0 ? tasks.map((task) => (
               <div className="atask"key={task.id}>
                 <h2>name {task.name}</h2>
@@ -71,7 +72,7 @@ const TaskBoard = ({ userInfo }:{
             </form>
 
         </>
-      ) : (<><p>nothing here :)</p><div className="atask">
+      ) : (<><p>{"nothing here :)"}</p><div className="atask">
       <h2>name coolName</h2>
       <p> desc some description</p>
       <p id="points">points 10</p>
@@ -79,6 +80,8 @@ const TaskBoard = ({ userInfo }:{
       <button>finished this</button>
     </div></>)
       }
+      <h1>{"this is a taskboard :)"} {userInfo?.username}</h1>
+      <button className="bg-lime-600"onClick={()=> {getTask()}}>click me!</button>
     </>
   );
 };
