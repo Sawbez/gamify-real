@@ -3,12 +3,14 @@ import "./App.css";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import useFetch from "./useFetch";
+import { User } from "./schema.ts";
+
 
 type HelloSchema = {
   hello: string;
 };
 
-const App = () => {
+const App = ({signedin, userInfo} : {signedin:Boolean;userInfo: User | null; }) => {
   const [resp, loading] = useFetch<HelloSchema>("/hw");
   const [count, setCount] = useState(0);
 

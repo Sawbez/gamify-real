@@ -1,8 +1,14 @@
 import React from "react";
 import "./App.css";
+import { Dispatch, SetStateAction } from "react";
+import { User } from "./schema.ts";
 
-const SignIn = () => {
-  const login = (event: React.FormEvent<HTMLFormElement>) => {
+
+const SignIn = ({setSignedIn, setUserInfo }: {
+  setSignedIn:Dispatch<SetStateAction<boolean>>;
+  setUserInfo:Dispatch<SetStateAction<User|null>>;
+  }) => {
+  const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");

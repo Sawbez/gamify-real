@@ -17,7 +17,7 @@ const App2 = () =>{
   return (
     <BrowserRouter>
     <Routes>
-        <Route path='/' element={<Layout signedin={signedin} setSignedIn={setSignedIn} userInfo={userInfo}/>}>
+        <Route path='/' element={<Layout signedin={signedin} userInfo={userInfo}/>}>
           <Route index element={<App signedin={signedin} userInfo={userInfo}/>}></Route>
           <Route path="/signin" element={<SignIn setSignedIn={setSignedIn} setUserInfo={setUserInfo}/>}></Route>
           <Route path="/signup" element={<SignUp setSignedIn={setSignedIn} setUserInfo={setUserInfo}/>}></Route>
