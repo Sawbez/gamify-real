@@ -21,21 +21,27 @@ const TaskBoard = ({ userInfo }:{
       }
     }
 
-    getTask(); 
+    getTask();
 
-    async function addTask(){
+    async function addTask(event: React.FormEvent<HTMLFormElement>){
+      event.preventDefault();
+      const formData = new FormData(event.currentTarget);
       const task:Task = {
         id:42069,
         userId: userInfoVal?.id!,
-        name:"example name",
-        description:"example desc",
+        name: formData.get("name")?.toString()!,
+        description: formData.get("description")?.toString()!,
         points:10,
-        categoryId:2
+        categoryId: Number.parseInt(formData.get("categoryId")?.toString()!),
       }
       const response = await fetch(`http://localhost:5000/tasks/${userInfoVal?.id}`,{
             method: 'POST',
             body: JSON.stringify(task),
         });
+
+      if (response.ok) {
+        alert("item added!");
+      }
     }
 
   return (
@@ -52,14 +58,18 @@ const TaskBoard = ({ userInfo }:{
               </div>
             )) : <p>No tasks</p>}
 
-            <form>
+
+            <form onSubmit={addTask}>
+              <h2>create a task</h2>
               <label>name</label>
               <input name="name"></input>
               <label>Desc</label>
               <input name="description"></input>
               <label>Category</label>
               <input name="categoryId"></input>
+              <input type="submit">add Task</input>
             </form>
+
         </>
       ) : (<><p>nothing here :)</p><div className="atask">
       <h2>name coolName</h2>
