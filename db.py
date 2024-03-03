@@ -27,10 +27,10 @@ T = TypeVar("T")  # Type variable for data class conversion
 
 def get_conn():
     return psycopg2.connect(
-        dbname,
-        user,
-        password,
-        host,
+        dbname=dbname,
+        user=user,
+        password=password,
+        host=host,
         # cursor_factory=DictCursor,  # Use DictCursor to get rows as dictionaries
     )
 
