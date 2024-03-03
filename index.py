@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from flask import Flask, jsonify, render_template, send_from_directory
+from flask import Flask, jsonify, render_template, send_from_directory, request
 from jinja2 import TemplateError
 
 from db import execute, executescript, fetchall, fetchone
@@ -21,12 +21,19 @@ def hello():
 def api():
     return jsonify({"hello": "world"})
 
-
-@app.route("/users/<int:id_>")
-def users(id_):
-    execute("INSERT INTO Users (username) VALUES (%s)", (str(id_)))
-    users = fetchall("SELECT * FROM Users")
-    return jsonify({"data": users})
+@app.route("/users/", methods=["GET"])
+@app.route("/users/<string:username>", methods=["GET", "POST"])
+def users(username=None):
+    if request.method == "GET":
+        if username:
+            user = fetchone("SELECT * FROM Users WHERE username = %s", (username,))
+            return jsonify(user)
+        else:
+            users = fetchall("SELECT * FROM Users")
+            return jsonify(users)
+    elif request.method == "POST":
+        execute("INSERT INTO Users (username) VALUES (%s)", (username,))
+        return jsonify({ "message": "success" })
 
 
 @app.route("/", defaults={"path": ""})
