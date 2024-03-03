@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 
-const SignIn = () => {
+const SignUp = () => {
   const login = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -21,4 +21,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
