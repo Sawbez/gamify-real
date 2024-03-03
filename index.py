@@ -230,9 +230,10 @@ def hl_user_tasks(username: str, task_id: Optional[int] = None):
             return jsonify({ "message": "success" })
         data: TaskWithSubtasks = request.get_json()
         execute("INSERT INTO Tasks (userId, name, description, points, categoryId) VALUES (%s, %s, %s, %s, %s)", (user.id, data["name"], data["description"], data["points"], category_to_id(data["category"])))
-        task = fetchone("SELECT * FROM Tasks WHERE userId = %s AND name = %s", (user.id, data["name"]), dtype=Task)
-        for subtask in data["subtasks"]:
-            execute("INSERT INTO SubTasks (taskId, name, description, points) VALUES (%s, %s, %s, %s)", (task.id, subtask.name, subtask.description, subtask.points))
+        if data["subtasks"]:
+            task = fetchone("SELECT * FROM Tasks WHERE userId = %s AND name = %s", (user.id, data["name"]), dtype=Task)
+            for subtask in data["subtasks"]:
+                execute("INSERT INTO SubTasks (taskId, name, description, points) VALUES (%s, %s, %s, %s)", (task.id, subtask.name, subtask.description, subtask.points))
         return jsonify({ "message": "success" })
     else:
         return 404
