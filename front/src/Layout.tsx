@@ -23,10 +23,10 @@ const Layout = ({ userInfo }: {
           ) : (
             <>
               <li>
-                <Link to="/signin" className="text-blue-600">Sign in LLLLLLLLLLLL</Link>
+                <Link to="/signin" className="text-blue-600">Sign in</Link>
               </li>
               <li>
-                <Link to="/signup" className="text-blue-600">Signup</Link>
+                <Link to="/signup" className="text-blue-600">Sign up</Link>
               </li>
               <li>
                 <Link to="/taskboard" className="text-blue-600">Taskboard</Link>
