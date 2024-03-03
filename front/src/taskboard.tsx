@@ -34,9 +34,14 @@ const TaskBoard = ({ userInfo }:{
         points:10,
         categoryId: Number.parseInt(formData.get("categoryId")?.toString()!),
       }
-      const response = await fetch(`http://localhost:5000/tasks/${userInfoVal?.id}`,{
+
+      console.log(task)
+      const response = await fetch(`http://localhost:5000/users/${userInfoVal?.username}/tasks`,{
             method: 'POST',
             body: JSON.stringify(task),
+            headers: {
+              'Content-Type': 'application/json',
+            },
         });
 
       if (response.ok) {
@@ -62,11 +67,11 @@ const TaskBoard = ({ userInfo }:{
             <form onSubmit={addTask}>
               <h2>create a task</h2>
               <label>name</label>
-              <input name="name" />
+              <input name="name" type="text"/>
               <label>Desc</label>
-              <input name="description" />
+              <input name="description" type="text" />
               <label>Category</label>
-              <input name="categoryId" />
+              <input type="number" name="categoryId" />
               <button type="submit">create task</button>
             </form>
 
@@ -80,7 +85,7 @@ const TaskBoard = ({ userInfo }:{
         <p>cateogory "cooking"</p>
         <button>finished this</button>
       </div>
-    </>)};
+    </>)}
     </>
   );
 };
