@@ -24,13 +24,13 @@ type Leaderboard = Record<Categories, User[]>;
 
 -- Categories Table
 CREATE TABLE IF NOT EXISTS Categories (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL UNIQUE -- 'Health/Foods', 'Work', 'Fitness'
 );
 
 -- Achievements Table
 CREATE TABLE IF NOT EXISTS Achievements (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
     points INTEGER NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS Achievements (
 
 -- Users Table
 CREATE TABLE IF NOT EXISTS Users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     username TEXT NOT NULL UNIQUE
 );
 
@@ -75,7 +75,7 @@ CREATE TABLE IF NOT EXISTS UserAchievements (
 
 -- Tasks Table
 CREATE TABLE IF NOT EXISTS Tasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     userId INTEGER NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS Tasks (
 
 -- Sub-Tasks Table
 CREATE TABLE IF NOT EXISTS SubTasks (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id SERIAL PRIMARY KEY,
     taskId INTEGER NOT NULL,
     name TEXT NOT NULL,
     description TEXT NOT NULL,
