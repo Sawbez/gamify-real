@@ -10,7 +10,7 @@ from db import execute, fetchall, fetchone
 from schema import *
 
 dist = Path.joinpath(Path(__file__).parent, "front/dist")
-app = Flask(__name__, static_folder=dist / "assets", template_folder=dist)
+app = Flask(__name__, static_folder=str(dist / "assets"), template_folder=str(dist))
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
