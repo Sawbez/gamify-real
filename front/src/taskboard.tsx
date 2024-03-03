@@ -49,6 +49,10 @@ const TaskBoard = ({ userInfo }:{
       }
     }
 
+    async function finishedTask() {
+      
+    }
+
   return (
     <>
 
@@ -59,10 +63,12 @@ const TaskBoard = ({ userInfo }:{
                 <div className="atask"key={task.id}>
                   <h2>name {task.name}</h2>
                   <p> desc {task.description}</p>
-                  <p> points {task.points}</p>
-                  <p> category {task.categoryId}</p>
+                  <p id="points"> points {task.points}</p>
+                  <p id="category"> category {task.categoryId}</p>
+                  <button className="bg-lime-600"onClick={()=> {}}>finished</button>
                 </div>
               )) : <p>No tasks</p>}
+
             <form onSubmit={addTask}>
               <h2>create a task</h2>
               <label>name</label>
@@ -81,15 +87,12 @@ const TaskBoard = ({ userInfo }:{
         <div className="atask">
           <h2>name coolName</h2>
           <p> desc some description</p>
-          <p>points 10</p>
-          <p>cateogory "cooking"</p>
-          <button>finished this</button>
+          <p id="points">points 10</p>
+          <p id="category">cateogory "cooking"</p>
+          <button className="bg-lime-600"onClick={()=> {}}>finished</button>
+
         </div>
       </>)}
-
-
-  
-      <button className="bg-lime-600"onClick={()=> {getTask()}}>click me!</button>
     </>
   );
 };
