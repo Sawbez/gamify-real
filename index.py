@@ -38,23 +38,14 @@ def users(username: Optional[str] = None):
             if (user):
                 #success
                 session["username"] = user.username
-                return jsonify({
-                    "username": user.username,
-                    "id": user.id,
-                })
+                return jsonify(user)
             else:
                 # failure
                 return jsonify({"result": "failure"}), 404
 
         else:
             users = fetchall("SELECT * FROM Users", dtype=User)
-            usersobj = []
-            for user in users:
-                usersobj.append ({
-                    "username": user.username,
-                    "id": user.id,
-                })
-            return jsonify(usersobj)
+            return jsonify(users)
     elif request.method == "POST":
         execute("INSERT INTO Users (username) VALUES (%s)", (username,))
         return jsonify({ "message": "success" })
