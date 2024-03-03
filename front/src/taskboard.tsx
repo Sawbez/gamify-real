@@ -21,7 +21,7 @@ const TaskBoard = ({ userInfo }:{
       }
     }
 
-    getTask(); 
+    getTask();
 
     async function addTask(event: React.FormEvent<HTMLFormElement>){
       event.preventDefault();
@@ -29,10 +29,10 @@ const TaskBoard = ({ userInfo }:{
       const task:Task = {
         id:42069,
         userId: userInfoVal?.id!,
-        name:formData.get("name"),
-        description:formData.get("description"),
+        name: formData.get("name")?.toString()!,
+        description: formData.get("description")?.toString()!,
         points:10,
-        categoryId:formData.get("categoryId"),
+        categoryId: Number.parseInt(formData.get("categoryId")?.toString()!),
       }
       const response = await fetch(`http://localhost:5000/tasks/${userInfoVal?.id}`,{
             method: 'POST',
@@ -58,7 +58,7 @@ const TaskBoard = ({ userInfo }:{
               </div>
             )) : <p>No tasks</p>}
 
-            {/*
+
             <form onSubmit={addTask}>
               <h2>create a task</h2>
               <label>name</label>
@@ -69,7 +69,7 @@ const TaskBoard = ({ userInfo }:{
               <input name="categoryId"></input>
               <input type="submit">add Task</input>
             </form>
-          */}
+
         </>
       ) : (<><p>nothing here :)</p><div className="atask">
       <h2>name coolName</h2>
