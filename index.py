@@ -38,10 +38,10 @@ def users(username: Optional[str] = None):
             user = fetchone("SELECT * FROM Users WHERE username = %s", (username,), dtype=User)
             if (user):
                 #success
-                session["username"] = user[1]
+                session["username"] = user.username
                 return jsonify({
-                    "username": user[1],
-                    "id": user[0],
+                    "username": user.username,
+                    "id": user.id,
                 })
             else:
                 # failure
@@ -49,12 +49,11 @@ def users(username: Optional[str] = None):
 
         else:
             users = fetchall("SELECT * FROM Users", dtype=User)
-            print(users)
             usersobj = []
             for user in users:
                 usersobj.append ({
-                    "username": user[1],
-                    "id": user[0],
+                    "username": user.username,
+                    "id": user.id,
                 })
             return jsonify(usersobj)
     elif request.method == "POST":

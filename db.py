@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 from dataclasses import asdict, dataclass
 from os import environ
-from typing import Callable, List, Type, TypeVar
+from typing import Callable, List, Optional, Type, TypeVar
 
 import psycopg2
 from psycopg2.extras import DictCursor
@@ -35,8 +35,8 @@ def get_conn():
     )
 
 
-def use_db(f: Callable):
-    def wrapper(*args, dtype: Type[T], **kwargs):  # Optional data_class argument
+def use_db(f: Callable) -> Callable:
+    def wrapper(*args, dtype: T, **kwargs):  # Optional data_class argument
         conn = get_conn()
         cur = conn.cursor()
 
