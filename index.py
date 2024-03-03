@@ -1,8 +1,10 @@
 from pathlib import Path
 from typing import Optional
 
-from flask import Flask, jsonify, render_template, send_from_directory, request, sessoin
+from flask import Flask, jsonify, render_template, send_from_directory, request
+from flask_session import Session
 from jinja2 import TemplateError
+
 
 from db import execute, fetchall, fetchone
 from typing import *
@@ -10,6 +12,10 @@ from schema import *
 
 dist = Path.joinpath(Path(__file__).parent, "front/dist")
 app = Flask(__name__, static_folder=dist / "assets", template_folder=dist)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
+
 
 with open("schema.sql", "r") as f:
     execute(f.read())
@@ -32,6 +38,7 @@ def users(username: Optional[str] = None):
             user = fetchone("SELECT * FROM Users WHERE username = %s", (username,))
             if (user):
                 #success
+                session["username"] = user[1]
                 return jsonify({
                     "username": user[1],
                     "id": user[0],
