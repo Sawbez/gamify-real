@@ -54,9 +54,9 @@ def users(username: Optional[str] = None):
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
-def other(_path):
+def other(path):
     try:
-        return render_template(f"index.html", session=session)
+        return render_template("index.html", session=session)
     except TemplateError:
         return "404", 404
 
