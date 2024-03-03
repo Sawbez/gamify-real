@@ -52,19 +52,17 @@ const TaskBoard = ({ userInfo }:{
   return (
     <>
 
-      {userInfoVal ? (
-        <>
-          <h1>{"this is a taskboard :) "}</h1>
-          {tasks.length > 0 ? tasks.map((task) => (
-              <div className="atask"key={task.id}>
-                <h2>name {task.name}</h2>
-                <p> desc {task.description}</p>
-                <p> points {task.points}</p>
-                <p> category {task.categoryId}</p>
-              </div>
-            )) : <p>No tasks</p>}
-
-
+        {userInfoVal ? (
+          <>
+            <h1>{"this is a taskboard :) "}</h1>
+            {tasks.length > 0 ? tasks.map((task) => (
+                <div className="atask"key={task.id}>
+                  <h2>name {task.name}</h2>
+                  <p> desc {task.description}</p>
+                  <p> points {task.points}</p>
+                  <p> category {task.categoryId}</p>
+                </div>
+              )) : <p>No tasks</p>}
             <form onSubmit={addTask}>
               <h2>create a task</h2>
               <label>name</label>
@@ -76,26 +74,21 @@ const TaskBoard = ({ userInfo }:{
               <button type="submit">create task</button>
             </form>
 
-        </>
-      ) : (<>
-      <p>nothing here :)</p>
-      <div className="atask">
-        <h2>name coolName</h2>
-        <p> desc some description</p>
-        <p>points 10</p>
-        <p>cateogory "cooking"</p>
-        <button>finished this</button>
-      </div>
-    </>)}
-      ) : (<><p>{"nothing here :)"}</p><div className="atask">
-      <h2>name coolName</h2>
-      <p> desc some description</p>
-      <p id="points">points 10</p>
-      <p id="category">cateogory "cooking"</p>
-      <button>finished this</button>
-    </div></>)
-      }
-      <h1 className="text-blue-800">{"this is a taskboard :)"} {userInfo?.username}</h1>
+
+          </>
+        ) : (<>
+        <p>nothing here :)</p>
+        <div className="atask">
+          <h2>name coolName</h2>
+          <p> desc some description</p>
+          <p>points 10</p>
+          <p>cateogory "cooking"</p>
+          <button>finished this</button>
+        </div>
+      </>)}
+
+
+  
       <button className="bg-lime-600"onClick={()=> {getTask()}}>click me!</button>
     </>
   );
