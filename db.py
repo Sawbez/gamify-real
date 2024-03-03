@@ -10,6 +10,7 @@ config = ConfigParser()
 config.read(".env.db")
 config = config["ENV"]
 
+# Select correct configuration in prod
 if environ.get("POSTGRES_DATABASE"):
     dbname = environ["POSTGRES_DATABASE"]
     user = environ["POSTGRES_USER"]
