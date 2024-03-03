@@ -211,7 +211,7 @@ class TaskWithSubtasks(Task):
     subtasks: List[SubTask]
 
 @app.route("/users/<string:username>/tasks", methods=["GET", "POST"])
-@app.route("/users/<string:username>/tasks/<int:task_id>", methods=["GET", "POST"])
+@app.route("/users/<string:username>/tasks/<int:task_id>", methods=["GET", "POST", "DELETE"])
 def hl_user_tasks(username: str, task_id: Optional[int] = None):
     user = fetchone("SELECT * FROM Users WHERE username = %s", (username,), dtype=User)
     if not user:
@@ -236,6 +236,9 @@ def hl_user_tasks(username: str, task_id: Optional[int] = None):
             task = fetchone("SELECT * FROM Tasks WHERE userId = %s AND name = %s", (user.id, data["name"]), dtype=Task)
             for subtask in data["subtasks"]:
                 execute("INSERT INTO SubTasks (taskId, name, description, points) VALUES (%s, %s, %s, %s)", (task.id, subtask.name, subtask.description, subtask.points))
+        return jsonify({ "message": "success" })
+    elif request.method == "DELETE":
+        execute("DELETE FROM Tasks WHERE id = %s", (task_id,))
         return jsonify({ "message": "success" })
     else:
         return 404
