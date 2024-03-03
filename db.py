@@ -31,6 +31,7 @@ def execute(cur, conn, *args):
     cur.execute(*args)
     conn.commit()
 
+
 @use_db
 def fetchone(cur, _, *args):
     return cur.execute(*args).fetchone()
