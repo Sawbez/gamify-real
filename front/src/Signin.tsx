@@ -43,12 +43,12 @@ const SignIn = ({ userInfo }:{
 
   return (
     <>
-      <h1>Sign in</h1>
+      <h1 className="text-blue-800">Sign in</h1>
       
       <form onSubmit={login}>
         <label>Username</label>
         <input type="text" name="username" />
-        <button type="submit" >Sign in</button>
+        <button type="submit" class="bg-blue-500">Sign in</button>
       </form>
     </>
   );
