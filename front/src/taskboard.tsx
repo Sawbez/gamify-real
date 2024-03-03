@@ -80,7 +80,7 @@ const TaskBoard = ({ userInfo }:{
       <button>finished this</button>
     </div></>)
       }
-      <h1 class="text-blue-800">{"this is a taskboard :)"} {userInfo?.username}</h1>
+      <h1 className="text-blue-800">{"this is a taskboard :)"} {userInfo?.username}</h1>
       <button className="bg-lime-600"onClick={()=> {getTask()}}>click me!</button>
     </>
   );
