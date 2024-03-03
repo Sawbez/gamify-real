@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional
 
-from flask import Flask, jsonify, render_template, send_from_directory, request
+from flask import Flask, jsonify, render_template, send_from_directory, request, sessoin
 from jinja2 import TemplateError
 
 from db import execute, fetchall, fetchone
