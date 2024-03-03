@@ -5,51 +5,8 @@ from flask import Flask, jsonify, render_template, send_from_directory, request
 from jinja2 import TemplateError
 
 from db import execute, fetchall, fetchone
-from typing import List, TypedDict
-
-class Category(TypedDict):
-    id: int
-    name: str
-
-class Achievement(TypedDict):
-    id: int
-    name: str
-    description: str
-    points: int
-    categoryId: int
-
-class User(TypedDict):
-    id: int
-    username: str
-
-class UserExperience(TypedDict):
-    userId: int
-    categoryId: int
-    experience: int
-
-class UserLevel(TypedDict):
-    userId: int
-    categoryId: int
-    level: int
-
-class UserAchievement(TypedDict):
-    userId: int
-    achievementId: int
-
-class Task(TypedDict):
-    id: int
-    userId: int
-    name: str
-    description: str
-    points: int
-    categoryId: int
-
-class SubTask(TypedDict):
-    id: int
-    taskId: int
-    name: str
-    description: str
-    points: int
+from typing import *
+from schema import *
 
 dist = Path.joinpath(Path(__file__).parent, "front/dist")
 app = Flask(__name__, static_folder=dist / "assets", template_folder=dist)
@@ -68,6 +25,8 @@ def api():
     return jsonify({"hello": "world"})
 
 @app.route("/users/<string:username>", methods=["GET", "POST"])
+@app.route("/users/", methods=["GET"])
+@app.route("/users/<string:username>", methods=["GET", "POST", "DELETE"])
 def users(username: Optional[str] = None):
     if request.method == "GET":
         if username:
@@ -83,7 +42,7 @@ def users(username: Optional[str] = None):
                 return jsonify({"result": "failure"}), 404
 
         else:
-            users = fetchall("SELECT * FROM Users")
+            users = fetchall("SELECT * FROM Users", data_class=User)
             print(users)
             usersobj = []
             for user in users:
@@ -105,7 +64,7 @@ def other(path):
     try:
         return render_template(f"index.html")
     except TemplateError:
-        return 404
+        return "404", 404
 
 
 if __name__ == "__main__":
