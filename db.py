@@ -1,10 +1,11 @@
 from configparser import ConfigParser
-
-import psycopg2
+from os import environ
 
 config = ConfigParser()
 config.read('.env.db')
 config = config["ENV"]
+
+import psycopg2
 
 get_conn = lambda: psycopg2.connect(
     dbname=config["POSTGRES_DATABASE"],
@@ -34,12 +35,16 @@ def execute(cur, conn, *args):
     cur.execute(*args)
     conn.commit()
 
+@use_db
+def executescript(cur, conn, *args):
+    cur.executescript(*args)
+    conn.commit()
+
 
 @use_db
 def fetchone(cur, _, *args):
     cur.execute(*args)
     return cur.fetchone()
-
 
 @use_db
 def fetchall(cur, _, *args):
