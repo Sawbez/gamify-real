@@ -63,7 +63,7 @@ def users(username: Optional[str] = None):
 
 @app.route("/", defaults={"path": ""})
 @app.route("/<path:path>")
-def other(path):
+def other(_path):
     try:
         return render_template(f"index.html", session=session)
     except TemplateError:
