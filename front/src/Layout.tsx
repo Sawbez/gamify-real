@@ -1,9 +1,14 @@
 import { Outlet, Link } from "react-router-dom";
 import { Dispatch, SetStateAction } from "react";
+import { User } from "./schema";
 
 
-const Layout = ({setSignedIn: Dispatch<SetStateAction>,signedin: Boolean}) => {
-  
+const Layout = ({ setSignedIn, signedin, userInfo }: {
+  setSignedIn: Dispatch<SetStateAction<boolean>>;
+  signedin: boolean;
+  userInfo: User | null;
+}) => {
+
 
 
   return (

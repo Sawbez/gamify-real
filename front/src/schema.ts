@@ -1,9 +1,9 @@
-interface Category {
+export interface Category {
   id: number;
   name: string;
 }
 
-interface Achievement {
+export interface Achievement {
   id: number;
   name: string;
   description: string;
@@ -11,29 +11,29 @@ interface Achievement {
   categoryId: number;
 }
 
-interface User {
+export interface User {
   id: number;
   username: string;
 }
 
-interface UserExperience {
+export interface UserExperience {
   userId: number;
   categoryId: number;
   experience: number;
 }
 
-interface UserLevel {
+export interface UserLevel {
   userId: number;
   categoryId: number;
   level: number;
 }
 
-interface UserAchievement {
+export interface UserAchievement {
   userId: number;
   achievementId: number;
 }
 
-interface Task {
+export interface Task {
   id: number;
   userId: number;
   name: string;
@@ -42,7 +42,7 @@ interface Task {
   categoryId: number;
 }
 
-interface SubTask {
+export interface SubTask {
   id: number;
   taskId: number;
   name: string;
