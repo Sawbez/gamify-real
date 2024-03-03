@@ -1,18 +1,16 @@
 import React from "react";
 import "./App.css";
-import { Dispatch, SetStateAction,useState } from "react";
 import { User } from "./schema.ts";
-import  { Redirect,redirect } from 'react-router-dom'
+import { useState } from "react";
 
-
-const SignIn = ({ setSignedIn, setUserInfo }: {
-  setSignedIn: Dispatch<SetStateAction<boolean>>;
-  setUserInfo: Dispatch<SetStateAction<User | null>>;
+const SignIn = ({ userInfo }:{
+  userInfo: [User | null, React.Dispatch<React.SetStateAction<User | null>>]
 }) => {
 
-  const [redirectToHome, setRedirectToHome] = useState(false);
+  const [userInfoVal, setUserInfo] = userInfo;
 
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
+    console.log("hi pls work");
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
@@ -22,34 +20,25 @@ const SignIn = ({ setSignedIn, setUserInfo }: {
     try {
       const response = await fetch(`/users/${username}`, {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        
         // You might need to adjust this part based on how your backend expects the request
       });
       const data = await response.json();
-
-      if (response.ok) {
+      console.log(data);
+      if (data["username"]) {
         alert("sign in sucess!");
-        setSignedIn(true);
-        setUserInfo(data); // Assuming the response includes user info
-        setRedirectToHome(true);
+        setUserInfo(data);
+        console.log("sign in success!")
       } else {
         // Handle failure (e.g., user not found)
         
         console.error('Sign-in failed:', data.message);
-        setSignedIn(false);
-        setUserInfo(null);
         
       }
     } catch (error) {
       console.error('Error during sign-in:', error);
     }
   };
-
-  if (redirectToHome) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>
@@ -58,7 +47,7 @@ const SignIn = ({ setSignedIn, setUserInfo }: {
       <form onSubmit={login}>
         <label>Username</label>
         <input type="text" name="username" />
-        <button type="submit">Sign in</button>
+        <button type="submit" >Sign in</button>
       </form>
     </>
   );

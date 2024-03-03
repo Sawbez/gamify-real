@@ -5,8 +5,11 @@ import { User } from "./schema.ts";
 
 
 const SignUp = ({ userInfo }:{
-    userInfo: [User | null, React.Dispatch<React.SetStateAction<User | null>>]
+  userInfo: [User | null, React.Dispatch<React.SetStateAction<User | null>>]
 }) => {
+
+  const [userInfoVal, setUserInfo] = userInfo;
+  
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);

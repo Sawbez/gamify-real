@@ -44,7 +44,7 @@ def users(username: Optional[str] = None):
                 session["username"] = user.username
                 return jsonify(user)
             else:
-                return jsonify({ "result": "failure" }), 404
+                return jsonify({ "result": "failure" })
 
         else:
             users = fetchall("SELECT * FROM Users", dtype=User)
