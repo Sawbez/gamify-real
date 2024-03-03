@@ -241,7 +241,12 @@ def hl_user_tasks(username: str, task_id: Optional[int] = None):
         return jsonify({ "message": "success" })
         
     elif request.method == "DELETE":
+        #get the experience number of the task
+        task = fetchone("SELECT * FROM Tasks WHERE id = %s", (task_id,), dtype=Task)
+        #delete the task
         execute("DELETE FROM Tasks WHERE id = %s", (task_id,))
+        #add the experience back to the user
+        execute("UPDATE UserExperience SET experience = experience - %s WHERE userId = %s AND categoryId = %s", (task.points, user.id, task.categoryId))
         return jsonify({ "message": "success" })
     else:
         return 404
