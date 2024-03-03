@@ -106,14 +106,7 @@ const TaskBoard = ({ userInfo }:{
           </>
         ) : (<>
         <p>nothing here :)</p>
-        <div className="atask">
-          <h2>name coolName</h2>
-          <p> desc some description</p>
-          <p id="points">points 10</p>
-          <p id="category">cateogory "cooking"</p>
-          <button className="bg-lime-600"onClick={()=> {}}>finished</button>
-
-        </div>
+        
       </>)}
     </>
   );
