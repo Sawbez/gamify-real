@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Optional
 
-from flask import Flask, jsonify, render_template, send_from_directory, request
+from flask import Flask, jsonify, render_template, send_from_directory, request,session
 from flask_session import Session
 from jinja2 import TemplateError
 
@@ -68,7 +68,7 @@ def users(username: Optional[str] = None):
 @app.route("/<path:path>")
 def other(path):
     try:
-        return render_template(f"index.html")
+        return render_template(f"index.html", session=session)
     except TemplateError:
         return "404", 404
 
