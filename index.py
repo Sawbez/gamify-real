@@ -1,13 +1,13 @@
 from pathlib import Path
+from typing import *
 from typing import Optional
 
-from flask import Flask, jsonify, render_template, send_from_directory, request,session
+from flask import (Flask, jsonify, render_template, request,
+                   send_from_directory, session)
 from flask_session import Session
 from jinja2 import TemplateError
 
-
 from db import execute, fetchall, fetchone
-from typing import *
 from schema import *
 
 dist = Path.joinpath(Path(__file__).parent, "front/dist")
@@ -35,7 +35,7 @@ def api():
 def users(username: Optional[str] = None):
     if request.method == "GET":
         if username:
-            user = fetchone("SELECT * FROM Users WHERE username = %s", (username,))
+            user = fetchone("SELECT * FROM Users WHERE username = %s", (username,), dtype=User)
             if (user):
                 #success
                 session["username"] = user[1]
@@ -48,7 +48,7 @@ def users(username: Optional[str] = None):
                 return jsonify({"result": "failure"}), 404
 
         else:
-            users = fetchall("SELECT * FROM Users", data_class=User)
+            users = fetchall("SELECT * FROM Users", dtype=User)
             print(users)
             usersobj = []
             for user in users:
