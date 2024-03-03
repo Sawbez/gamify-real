@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Layout.tsx";
 import SignIn from "./Signin.tsx";
 import SignUp from "./Signup.tsx";
+import Xp from "./xp.tsx"
 
 const App = () => {
   let userInfo = useState<User | null>(null);
@@ -21,6 +22,7 @@ const App = () => {
           { <Route index element={<TaskBoard userInfo={userInfo} />}></Route> }
           <Route path="/signin" element={<SignIn userInfo={userInfo} />}></Route>
           <Route path="/signup" element={<SignUp userInfo={userInfo} />}></Route>
+          <Route path="/xp" element={<Xp userInfo={userInfo}/>}
         </Route>
       </Routes>
       </BrowserRouter>

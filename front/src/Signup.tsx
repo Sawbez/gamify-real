@@ -47,8 +47,7 @@ const SignUp = ({ userInfo }:{
 
   return (
     <>
-      <h1 className="text-blue-800"
-      >Sign Up</h1>
+      <h1 className="text-blue-800">Sign Up</h1>
       <form onSubmit={login}>
         <label>Username</label>
         <input type="text" name="username" />

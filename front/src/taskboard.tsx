@@ -3,6 +3,7 @@ import "./App.css";
 import { User } from "./schema.ts";
 import { Task } from "./schema.ts";
 import { useState } from "react";
+import { useEffect } from 'react';
 
 const TaskBoard = ({ userInfo }:{
   userInfo: [User | null, React.Dispatch<React.SetStateAction<User | null>>]
@@ -21,7 +22,7 @@ const TaskBoard = ({ userInfo }:{
       }
     }
 
-    getTask();
+    useEffect(()=> {getTask()});
 
     async function addTask(event: React.FormEvent<HTMLFormElement>){
       event.preventDefault();
@@ -49,9 +50,29 @@ const TaskBoard = ({ userInfo }:{
       }
     }
 
-    async function finishedTask() {
-      
+    async function finishedTask(taskId: number) {
+      try {
+        const response = await fetch(`http://localhost:5000/users/${userInfoVal!.username}/tasks/${taskId}`, {
+          method: 'DELETE', // Use the DELETE HTTP method to request the deletion of a resource
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+    
+        if (response.ok) {
+          // If the delete was successful, filter out the deleted task from the local state
+          setTasks(tasks.filter(task => task.id !== taskId));
+          alert("Task successfully deleted!");
+        } else {
+          // Handle non-successful responses
+          alert("Failed to delete the task.");
+        }
+      } catch (error) {
+        console.error("Error deleting task:", error);
+        alert("Error deleting task.");
+      }
     }
+    
 
   return (
     <>
@@ -65,7 +86,8 @@ const TaskBoard = ({ userInfo }:{
                   <p> desc {task.description}</p>
                   <p id="points"> points {task.points}</p>
                   <p id="category"> category {task.categoryId}</p>
-                  <button className="bg-lime-600"onClick={()=> {}}>finished</button>
+                  <button className="bg-lime-600" onClick={() => finishedTask(task.id)}>finished</button>
+
                 </div>
               )) : <p>No tasks</p>}
 

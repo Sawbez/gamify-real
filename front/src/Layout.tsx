@@ -17,7 +17,12 @@ const Layout = ({ userInfo }: {
           </li>
           {/* Conditional rendering based on whether userInfoVal is not null */}
           {userInfoVal ? (
+            <>
             <p>Hello, {userInfoVal.username}</p>
+            <li>
+                <Link to="/xp" className="text-blue-600">XP</Link>
+              </li>
+            </>
           ) : (
             <>
               <li>
