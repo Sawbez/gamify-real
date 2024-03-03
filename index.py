@@ -26,7 +26,6 @@ def api():
 
 @app.route("/users/<string:username>", methods=["GET", "POST"])
 @app.route("/users/", methods=["GET"])
-@app.route("/users/<string:username>", methods=["GET", "POST", "DELETE"])
 def users(username: Optional[str] = None):
     if request.method == "GET":
         if username:

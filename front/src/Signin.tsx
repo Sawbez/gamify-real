@@ -14,7 +14,7 @@ const SignIn = () => {
       // headers: {}, // if you need to include headers
       // body: JSON.stringify(data), // if you need to include a body
     });
-    const data = await response.json(); // Assuming the response is JSON
+    const data: {username: string, id: number} = await response.json(); // Assuming the response is JSON
     console.log(data); // Process the response data
   };
 
