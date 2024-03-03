@@ -1,7 +1,8 @@
 import { Outlet, Link } from "react-router-dom";
+import { Dispatch, SetStateAction } from "react";
 
 
-const Layout = () => {
+const Layout = ({setSignedIn: Dispatch<SetStateAction>,signedin: Boolean}) => {
   
 
 
