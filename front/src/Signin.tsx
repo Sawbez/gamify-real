@@ -2,11 +2,18 @@ import React from "react";
 import "./App.css";
 
 const SignIn = () => {
-  const login = (event: React.FormEvent<HTMLFormElement>) => {
+  const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
-    console.log(username); // Process username here
+    // Ensure you have a correct endpoint and method for your fetch call
+    const response = await fetch(`/users/${username}/`, {
+      method: 'GET', // or 'POST', depending on your backend
+      // headers: {}, // if you need to include headers
+      // body: JSON.stringify(data), // if you need to include a body
+    });
+    const data = await response.json(); // Assuming the response is JSON
+    console.log(data); // Process the response data
   };
 
   return (
