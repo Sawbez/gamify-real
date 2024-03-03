@@ -22,9 +22,9 @@ def api():
     return jsonify({"hello": "world"})
 
 
-@app.route("/users/<int:id>")
-def users():
-    execute("INSERT INTO Users (name) VALUES (%s)", ("abacadaba" + str(randint(1,100))))
+@app.route("/users/<int:id_>")
+def users(id_):
+    execute("INSERT INTO Users (username) VALUES (%s)", (str(id_)))
     users = fetchall("SELECT * FROM Users")
     return jsonify({"data": users})
 

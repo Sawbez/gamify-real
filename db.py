@@ -6,7 +6,7 @@ config = ConfigParser()
 config.read('.env.db')
 config = config["ENV"]
 
-conn = psycopg2.connect(
+get_conn = lambda: psycopg2.connect(
     dbname=config["POSTGRES_DATABASE"],
     user=config["POSTGRES_USER"],
     password=config["POSTGRES_PASSWORD"],
@@ -16,8 +16,11 @@ conn = psycopg2.connect(
 
 def use_db(f):
     def wrapper(*args, **kwargs):
+        conn = get_conn()
         cur = conn.cursor()
+        
         req = f(cur, conn, *args, **kwargs)
+        
         cur.close()
         conn.close()
 
@@ -34,9 +37,11 @@ def execute(cur, conn, *args):
 
 @use_db
 def fetchone(cur, _, *args):
-    return cur.execute(*args).fetchone()
+    cur.execute(*args)
+    return cur.fetchone()
 
 
 @use_db
-def fetchall(cur, conn, *args):
-    return cur.execute(*args).fetchall()
+def fetchall(cur, _, *args):
+    cur.execute(*args)
+    return cur.fetchall()
