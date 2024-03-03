@@ -34,6 +34,8 @@ def users(username=None):
     elif request.method == "POST":
         execute("INSERT INTO Users (username) VALUES (%s)", (username,))
         return jsonify({ "message": "success" })
+    else:
+        return 404
 
 
 @app.route("/", defaults={"path": ""})

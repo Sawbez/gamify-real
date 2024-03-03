@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
 
-const SignIn = () => {
-  const login = async (event: React.FormEvent<HTMLFormElement>) => {
+const SignUp = () => {
+  const signuup = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
     // Ensure you have a correct endpoint and method for your fetch call
     const response = await fetch(`/users/${username}/`, {
-      method: 'GET', // or 'POST', depending on your backend
+      method: 'POST', // or 'POST', depending on your backend
       // headers: {}, // if you need to include headers
       // body: JSON.stringify(data), // if you need to include a body
     });
@@ -19,7 +19,7 @@ const SignIn = () => {
   return (
     <>
       <h1>Sign in</h1>
-      <form onSubmit={login}>
+      <form onSubmit={signuup}>
         <label>Username</label>
         <input type="text" name="username" />
         <button type="submit">Sign in</button>
@@ -28,4 +28,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;
