@@ -13,7 +13,7 @@ const SignUp = ({setSignedIn, setUserInfo }:{
     const formData = new FormData(event.currentTarget);
     const username = formData.get("username");
     console.log(username); // Process username here
-
+    
   };
 
   return (

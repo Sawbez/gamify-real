@@ -4,6 +4,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import useFetch from "./useFetch";
 import { User } from "./schema.ts";
+import TaskBoard from "./taskboard.tsx";
 
 
 type HelloSchema = {
@@ -42,6 +43,8 @@ const App = ({signedin, userInfo} : {signedin:Boolean;userInfo: User | null; }) 
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+      {signedin ? (<p>something</p>) : (<TaskBoard userInfo={userInfo}/>)}
     </>
   );
 };
