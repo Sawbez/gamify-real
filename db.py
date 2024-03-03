@@ -6,10 +6,6 @@ from typing import Callable, List, Type, TypeVar
 import psycopg2
 from psycopg2.extras import DictCursor
 
-config = ConfigParser()
-config.read(".env.db")
-config = config["ENV"]
-
 # Select correct configuration in prod
 if environ.get("POSTGRES_DATABASE"):
     dbname = environ["POSTGRES_DATABASE"]
@@ -17,6 +13,10 @@ if environ.get("POSTGRES_DATABASE"):
     password = environ["POSTGRES_PASSWORD"]
     host = environ["POSTGRES_HOST"]
 else:
+    config = ConfigParser()
+    config.read(".env.db")
+    config = config["ENV"]
+
     dbname = config["POSTGRES_DATABASE"]
     user = config["POSTGRES_USER"]
     password = config["POSTGRES_PASSWORD"]
@@ -31,14 +31,12 @@ def get_conn():
         user,
         password,
         host,
-        #cursor_factory=DictCursor,  # Use DictCursor to get rows as dictionaries
+        # cursor_factory=DictCursor,  # Use DictCursor to get rows as dictionaries
     )
 
 
 def use_db(f: Callable):
-    def wrapper(
-        *args, dtype: Type[T] = None, **kwargs
-    ):  # Optional data_class argument
+    def wrapper(*args, dtype: Type[T] = None, **kwargs):  # Optional data_class argument
         conn = get_conn()
         cur = conn.cursor()
 
