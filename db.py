@@ -31,23 +31,23 @@ def get_conn():
         user,
         password,
         host,
-        cursor_factory=DictCursor,  # Use DictCursor to get rows as dictionaries
+        #cursor_factory=DictCursor,  # Use DictCursor to get rows as dictionaries
     )
 
 
 def use_db(f: Callable):
     def wrapper(
-        *args, data_class: Type[T] = None, **kwargs
+        *args, dtype: Type[T] = None, **kwargs
     ):  # Optional data_class argument
         conn = get_conn()
         cur = conn.cursor()
 
         req = f(cur, conn, *args, **kwargs)
 
-        if data_class and req:  # Convert result to data class instance(s) if applicable
+        if dtype and req:  # Convert result to data class instance(s) if applicable
             if isinstance(req, list):
-                return [data_class(**dict(row)) for row in req]  # For fetchall
-            return data_class(**dict(req))  # For fetchone
+                return [dtype(*row) for row in req]  # For fetchall
+            return dtype(*req)  # For fetchone
 
         cur.close()
         conn.close()
