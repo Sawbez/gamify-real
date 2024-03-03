@@ -16,7 +16,6 @@ with open("schema.sql", "r") as f:
 def hello():
     return render_template("index.html")
 
-
 @app.route("/hw")
 def api():
     return jsonify({"hello": "world"})
