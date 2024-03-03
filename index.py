@@ -2,8 +2,7 @@ from pathlib import Path
 from typing import *
 from typing import Optional
 
-from flask import (Flask, jsonify, render_template, request,
-                   send_from_directory, session)
+from flask import Flask, jsonify, render_template, request, session
 from flask_session import Session
 from jinja2 import TemplateError
 
