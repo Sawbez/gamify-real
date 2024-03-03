@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import *
 from typing import Optional
+from flask_cors import CORS
 
 from flask import Flask, jsonify, render_template, request, session
 from flask_session import Session
@@ -14,7 +15,7 @@ app = Flask(__name__, static_folder=str(dist / "assets"), template_folder=str(di
 app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
-
+CORS(app)
 
 with open("schema.sql", "r") as f:
     execute(f.read())

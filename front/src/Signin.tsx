@@ -18,7 +18,7 @@ const SignIn = ({ userInfo }:{
 
     // Assuming the backend is adjusted to handle sign-in
     try {
-      const response = await fetch(`/users/${username}`, {
+      const response = await fetch(`http://localhost:5000/users/${username}`, {
         method: 'GET',
         
         // You might need to adjust this part based on how your backend expects the request
