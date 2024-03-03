@@ -34,7 +34,6 @@ def get_conn():
         # cursor_factory=DictCursor,  # Use DictCursor to get rows as dictionaries
     )
 
-
 def use_db(f: Callable) -> Callable:
     def wrapper(*args, dtype: Optional[T] = None, **kwargs):
         conn = get_conn()
