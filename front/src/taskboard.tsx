@@ -79,8 +79,8 @@ const TaskBoard = ({ userInfo }:{
         ) : (<>
         <p>nothing here :)</p>
         <div className="atask">
-          <h2>name coolName</h2>
-          <p> desc some description</p>
+          <h2>Quests</h2>
+          <p>Write your tasks!</p>
           <p>points 10</p>
           <p>cateogory "cooking"</p>
           <button>finished this</button>
