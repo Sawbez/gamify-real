@@ -1,5 +1,5 @@
-@tailwind base;
 @tailwind components;
+@tailwind base;
 @tailwind utilities;
 
 :root {
@@ -15,6 +15,26 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.atask{
+color:darkslategray
+}
+
+.atask button {
+background-color:darkorange
+}
+
+#category {
+color:chocolate
+}
+
+#points {
+  color:forestgreen
+}
+
+.atask h2 {
+  color:darkslategray;
 }
 
 a {
