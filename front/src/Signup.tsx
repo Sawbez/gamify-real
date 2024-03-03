@@ -25,7 +25,7 @@ const SignUp = ({ userInfo }:{
       <form onSubmit={login}>
         <label>Username</label>
         <input type="text" name="username" />
-        <button type="submit" className="bg-blue-500">Sign in</button>
+        <button type="submit" className="bg-blue-500">Sign Up</button>
       </form>
     </>
   );

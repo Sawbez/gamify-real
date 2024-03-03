@@ -28,6 +28,9 @@ const Layout = ({ userInfo }: {
               <li>
                 <Link to="/signup" className="text-blue-600">Signup</Link>
               </li>
+              <li>
+                <Link to="/taskboard" className="text-blue-600">Taskboard</Link>
+              </li>
             </>
           )}
         </ul>

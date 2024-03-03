@@ -23,6 +23,7 @@ const SignIn = ({ userInfo }:{
         
         // You might need to adjust this part based on how your backend expects the request
       });
+      console.log(response);
       const data = await response.json();
       console.log(data);
       if (data["username"]) {

@@ -21,6 +21,7 @@ const App = () => {
           {/* <Route index element={<App />}></Route> */}
           <Route path="/signin" element={<SignIn userInfo={userInfo} />}></Route>
           <Route path="/signup" element={<SignUp userInfo={userInfo} />}></Route>
+          <Route path="/taskboard" element={<TaskBoard />}></Route>
         </Route>
       </Routes>
       </BrowserRouter>

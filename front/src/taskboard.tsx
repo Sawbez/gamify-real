@@ -15,7 +15,7 @@ const TaskBoard = ({userInfo}:{userInfo:User|null}) =>{
   return (
     <>
       <h1>this is a taskboard :) {userInfo?.username}</h1>
-      <button onClick={getTask()}>click me!</button>
+      <button onClick={()=> {getTask()}}>click me!</button>
     </>
   );
 };
